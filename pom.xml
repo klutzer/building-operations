@@ -51,6 +51,7 @@
 					<webApp>
 						<contextPath>/</contextPath>
 					</webApp>
+					<contextXml>${project.basedir}/src/main/resources/jetty-config.xml</contextXml>
 				</configuration>
 			</plugin>
 		</plugins>
