@@ -12,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.buildingapp.RestApplication;
 import com.buildingapp.bean.Customer;
 import com.buildingapp.repository.CustomerRepository;
 
@@ -23,17 +24,17 @@ import io.swagger.annotations.Api;
 @Consumes(MediaType.APPLICATION_JSON)
 public class CustomerResource {
 
-	private CustomerRepository repository = new CustomerRepository();
+	private CustomerRepository repository = RestApplication.get(CustomerRepository.class);
 
 	@GET
 	public List<Customer> listAll() {
-		return repository.listAll();
+		return repository.listByExample(new Customer());
 	}
 
 	@GET
 	@Path("{id}")
 	public Customer get(@PathParam("id") Integer customerId) {
-		return repository.get(customerId);
+		return repository.getById(new Customer(customerId));
 	}
 
 	@POST
@@ -48,7 +49,7 @@ public class CustomerResource {
 
 	@DELETE
 	@Path("{id}")
-	public Customer remove(@PathParam("id") Integer customerId) {
-		return repository.remove(customerId);
+	public void remove(@PathParam("id") Integer customerId) {
+		repository.delete(new Customer(customerId));
 	}
 }

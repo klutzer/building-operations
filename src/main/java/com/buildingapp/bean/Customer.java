@@ -25,6 +25,10 @@ public class Customer {
 	public Customer() {
 
 	}
+	
+	public Customer(int id) {
+		this.id = id;
+	}
 
 	public Customer(int id, String name, LocalDate birthday, boolean enable, Double salary, Address address,
 			List<Phone> phones) {

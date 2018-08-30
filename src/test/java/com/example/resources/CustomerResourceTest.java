@@ -16,11 +16,6 @@ import com.buildingapp.repository.CustomerRepository;
 
 public class CustomerResourceTest extends RestTest {
 
-	@After
-	public void tearDown() {
-		CustomerRepository.resetAndCreateData();
-	}
-
 	@Test
 	public void testReturnAllCustomers() {
 		List<Customer> customers = target().path("customer").request().get(new GenericType<List<Customer>>() {});

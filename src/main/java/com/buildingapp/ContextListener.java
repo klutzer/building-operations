@@ -9,12 +9,12 @@ public class ContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent ev) {
-		System.out.println("INICIANDO!");
+		System.out.println("Initializing servlet...");
 	}
 
 	@Override
 	public void contextDestroyed(ServletContextEvent ev) {
-		System.out.println("PARANDO!");
+		System.out.println("Stopping servlet...");
 	}
 
 }

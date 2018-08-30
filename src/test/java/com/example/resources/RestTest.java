@@ -11,8 +11,8 @@ import org.glassfish.jersey.test.spi.TestContainerException;
 import org.glassfish.jersey.test.spi.TestContainerFactory;
 
 import com.buildingapp.ContextListener;
-import com.buildingapp.JsonProvider;
 import com.buildingapp.RestApplication;
+import com.buildingapp.config.JsonProvider;
 
 public abstract class RestTest extends JerseyTest {
 

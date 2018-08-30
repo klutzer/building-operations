@@ -1,4 +1,4 @@
-package com.buildingapp;
+package com.buildingapp.config;
 
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
