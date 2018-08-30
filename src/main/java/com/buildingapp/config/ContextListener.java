@@ -1,4 +1,4 @@
-package com.buildingapp;
+package com.buildingapp.config;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

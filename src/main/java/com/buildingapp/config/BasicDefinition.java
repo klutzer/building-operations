@@ -1,4 +1,4 @@
-package com.buildingapp;
+package com.buildingapp.config;
 
 import io.swagger.annotations.SwaggerDefinition;
 import io.swagger.jaxrs.Reader;
