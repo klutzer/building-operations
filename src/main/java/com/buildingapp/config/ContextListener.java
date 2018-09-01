@@ -1,20 +1,27 @@
 package com.buildingapp.config;
 
+import java.util.logging.Logger;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.buildingapp.RestApplication;
+
 @WebListener
 public class ContextListener implements ServletContextListener {
 
+	private static final Logger LOGGER = Logger.getLogger(ContextListener.class.getSimpleName());
+	
 	@Override
 	public void contextInitialized(ServletContextEvent ev) {
-		System.out.println("Initializing servlet...");
+		LOGGER.info("Initializing servlet...");
 	}
 
 	@Override
 	public void contextDestroyed(ServletContextEvent ev) {
-		System.out.println("Stopping servlet...");
+		LOGGER.info("Stopping servlet...");
+		RestApplication.releaseAndShutdown();
 	}
 
 }

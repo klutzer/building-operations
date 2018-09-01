@@ -29,10 +29,14 @@ import io.swagger.jaxrs.listing.SwaggerSerializers;
 @ApplicationPath("api")
 public class RestApplication extends ResourceConfig {
 
-	private static final Container CONTAINER = new MentaContainer();
+	private static final Logger LOGGER = Logger.getLogger("RestApplication");
+	private static RestApplication instance;
+	private final Container container = new MentaContainer();
+	private final ConnectionManager connectionManager = new H2MemoryConnectionManager();
 
 	public RestApplication() {
-		System.out.println("Starting RestApplication...");
+		instance = this;
+		LOGGER.info("Starting RestApplication...");
 		register(JacksonFeature.class);
 		register(MultiPartFeature.class);
 		packages(true, getClass().getPackage().getName());
@@ -41,15 +45,27 @@ public class RestApplication extends ResourceConfig {
 				LoggingFeature.Verbosity.PAYLOAD_TEXT, 8192));
 		configureIoC();
 		configureSwagger();
-		initializeData();
+	}
+
+	public static RestApplication getInstance() {
+		return instance;
 	}
 
 	public static <E> E get(Object key) {
-		return CONTAINER.get(key);
+		return getInstance().container.get(key);
 	}
 
 	public static void clearThreadScope() {
-		CONTAINER.clear(Scope.THREAD);
+		getInstance().container.clear(Scope.THREAD);
+	}
+
+	public static void releaseAndShutdown() {
+		LOGGER.info("Stopping RestApplication...");
+		clearThreadScope();
+		getInstance().container.clear(Scope.SINGLETON);
+		getInstance().connectionManager.shutdown();
+		instance = null;
+		LOGGER.info("RestApplication stopped");
 	}
 
 	private void configureSwagger() {
@@ -64,18 +80,17 @@ public class RestApplication extends ResourceConfig {
 	}
 
 	private void configureIoC() {
-		ConnectionManager connectionManager = new H2MemoryConnectionManager();
-		CONTAINER.ioc(ConnectionManager.class, singleton(connectionManager));
-		CONTAINER.ioc(BeanManager.class, singleton(new DatabaseMappings().configure()));
-		CONTAINER.ioc(Connection.class, connectionManager, Scope.THREAD);
-		CONTAINER.ioc(BeanSession.class, connectionManager.getSessionClass(), Scope.THREAD)
+		container.ioc(ConnectionManager.class, singleton(connectionManager));
+		container.ioc(BeanManager.class, singleton(new DatabaseMappings().configure()));
+		container.ioc(Connection.class, connectionManager, Scope.THREAD);
+		container.ioc(BeanSession.class, connectionManager.getSessionClass(), Scope.THREAD)
 				.addConstructorDependency(BeanManager.class).addConstructorDependency(Connection.class);
-		CONTAINER.autowire(BeanSession.class, "session");
+		container.autowire(BeanSession.class, "session");
+		initializeData(connectionManager);
 	}
 
-	private void initializeData() {
-		BeanSession session = get(BeanSession.class);
-		session.createTables();
+	private void initializeData(ConnectionManager connectionManager) {
+		connectionManager.preRun(get(BeanSession.class));
 		clearThreadScope();
 	}
 }

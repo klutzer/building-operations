@@ -2,32 +2,65 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> </head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	 crossorigin="anonymous">
+</head>
 
 <body>
-  <div id="app" class="container">
-    <div class="row">
-      <p>{{ teste }}</p>
-    </div>
-    <div class="row">
-      <div class="col-8">
-        <input class="form-control" v-model="teste" type="text"> </div>
-      <div class="col-4">
-        <button v-on:click="getCustomers" class="form-control">Busca de clientes</button>
-      </div>
-    </div>
-    <div class="row">
-      <p v-if="customers">{{ customers }}</p>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
-  <script src="app.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<div id="app" class="container">
+		<div class="page-header">
+			<h2 class="text-center">Cálculo de Transporte de Cargas</h2>
+		</div>
+		<form>
+			<div class="col-md-8 offset-md-2">
+				<div class="form-group">
+					<label for="distancia-pav">Distância - Rodovia Pavimentada</label>
+					<input name="distancia-pav" class="form-control" v-model.number="dadosCalculo.distanciaPavimentada" type="number">
+				</div>
+				<div class="form-group">
+					<label for="distancia-npav">Distância - Rodovia Não Pavimentada</label>
+					<input name="distancia-npav" class="form-control" v-model.number="dadosCalculo.distanciaNaoPavimentada" type="number">
+				</div>
+				<div class="form-group">
+					<label for="veiculo">Veículo</label>
+					<select name="veiculo" class="form-control" v-model="dadosCalculo.veiculo">
+						<option disabled selected value=undefined>Escolha um veículo</option>
+						<option v-for="veiculo in veiculos" v-bind:value="veiculo">
+							{{ veiculo.descricao }}
+						</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="cargaTransportada">Carga transportada</label>
+					<input name="cargaTransportada" class="form-control" v-model.number="dadosCalculo.cargaTransportada" type="number">
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-block btn-primary" v-on:click="calcular">Calcular</button>
+				</div>
+				<div v-if="resultado" class="from-group">
+					<div v-if="error" role="alert" class="alert alert-danger">
+						<span>Erro ao calcular: {{ resultado }}</span>
+					</div>
+					<div v-else role="alert" class="alert alert-info">
+						<span>Resultado: {{ resultado | currency('R$', 2, { decimalSeparator: ',' }) }}</span>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue2-filters/dist/vue2-filters.min.js"></script>
+	<script src="app.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	 crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	 crossorigin="anonymous"></script>
 </body>
 
 </html>

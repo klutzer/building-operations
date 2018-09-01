@@ -3,7 +3,6 @@ package com.buildingapp.repository;
 import java.util.List;
 
 import org.mentabean.BeanSession;
-import org.mentabean.jdbc.AnsiSQLBeanSession;
 
 public class GenericRepository<T> {
 
@@ -59,7 +58,6 @@ public class GenericRepository<T> {
 
 	public List<T> listByExample(T proto) {
 
-		AnsiSQLBeanSession.debugNativeSql(true);
 		return session.loadList(proto);
 	}
 

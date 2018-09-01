@@ -29,21 +29,8 @@ public abstract class ConnectionManager implements Factory<Connection>, Intercep
 
 	public abstract Class<? extends BeanSession> getSessionClass();
 
-	public void shutdown() {
-		pool.close();
-		deregisterDrivers();
-	}
+	public void preRun(BeanSession session) {
 
-	private static void deregisterDrivers() {
-		Enumeration<Driver> drivers = DriverManager.getDrivers();
-		while (drivers.hasMoreElements()) {
-			Driver driver = drivers.nextElement();
-			try {
-				DriverManager.deregisterDriver(driver);
-			} catch (Exception e) {
-				throw new BeanException(e);
-			}
-		}
 	}
 
 	public Connection getConnection() {
@@ -97,4 +84,20 @@ public abstract class ConnectionManager implements Factory<Connection>, Intercep
 		commitAndClose(connection);
 	}
 
+	public void shutdown() {
+		pool.close();
+		deregisterDrivers();
+	}
+
+	private static void deregisterDrivers() {
+		Enumeration<Driver> drivers = DriverManager.getDrivers();
+		while (drivers.hasMoreElements()) {
+			Driver driver = drivers.nextElement();
+			try {
+				DriverManager.deregisterDriver(driver);
+			} catch (Exception e) {
+				throw new BeanException(e);
+			}
+		}
+	}
 }

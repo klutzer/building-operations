@@ -5,22 +5,24 @@ import org.mentabean.BeanManager;
 import org.mentabean.DBTypes;
 import org.mentabean.util.PropertiesProxy;
 
-import com.buildingapp.bean.Customer;
+import com.buildingapp.data.Veiculo;
 
 public final class DatabaseMappings {
 
 	private BeanManager manager = new BeanManager();
 
 	public BeanManager configure() {
-		configureCustomer();
+		configureVeiculo();
 		return manager;
 	}
 
-	private void configureCustomer() {
-		Customer proxy = PropertiesProxy.create(Customer.class);
-		manager.addBeanConfig(new BeanConfig(Customer.class, "customers")
+	private void configureVeiculo() {
+		Veiculo proxy = PropertiesProxy.create(Veiculo.class);
+		manager.addBeanConfig(new BeanConfig(Veiculo.class, "veiculos")
 				.pk(proxy.getId(), DBTypes.AUTOINCREMENT)
-				.field(proxy.getName(), DBTypes.STRING));
+				.field(proxy.getDescricao(), DBTypes.STRING)
+				.field(proxy.getFatorMultiplicador(), DBTypes.BIGDECIMAL)
+				);
 	}
 
 }
