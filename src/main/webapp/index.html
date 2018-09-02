@@ -16,35 +16,35 @@
 		<form>
 			<div class="col-md-8 offset-md-2">
 				<div class="form-group">
-					<label for="distancia-pav">Distância - Rodovia Pavimentada</label>
-					<input name="distancia-pav" class="form-control" v-model.number="dadosCalculo.distanciaPavimentada" type="number">
+					<label for="distancePaved">Distância - Rodovia Pavimentada</label>
+					<input name="distancePaved" class="form-control" v-model.number="calcData.distancePaved" type="number">
 				</div>
 				<div class="form-group">
-					<label for="distancia-npav">Distância - Rodovia Não Pavimentada</label>
-					<input name="distancia-npav" class="form-control" v-model.number="dadosCalculo.distanciaNaoPavimentada" type="number">
+					<label for="distanceNotPaved">Distância - Rodovia Não Pavimentada</label>
+					<input name="distanceNotPaved" class="form-control" v-model.number="calcData.distanceNotPaved" type="number">
 				</div>
 				<div class="form-group">
-					<label for="veiculo">Veículo</label>
-					<select name="veiculo" class="form-control" v-model="dadosCalculo.veiculo">
+					<label for="vehicle">Veículo</label>
+					<select name="vehicle" class="form-control" v-model="calcData.vehicle">
 						<option disabled selected value=undefined>Escolha um veículo</option>
-						<option v-for="veiculo in veiculos" v-bind:value="veiculo">
-							{{ veiculo.descricao }}
+						<option v-for="vehicle in vehicles" v-bind:value="vehicle">
+							{{ vehicle.name }}
 						</option>
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="cargaTransportada">Carga transportada</label>
-					<input name="cargaTransportada" class="form-control" v-model.number="dadosCalculo.cargaTransportada" type="number">
+					<label for="cargoCarried">Carga transportada</label>
+					<input name="cargoCarried" class="form-control" v-model.number="calcData.cargoCarried" type="number">
 				</div>
 				<div class="form-group">
-					<button type="button" class="btn btn-block btn-primary" v-on:click="calcular">Calcular</button>
+					<button type="button" class="btn btn-block btn-primary" v-on:click="calculate">Calcular</button>
 				</div>
-				<div v-if="resultado" class="from-group">
+				<div v-if="result" class="from-group">
 					<div v-if="error" role="alert" class="alert alert-danger">
-						<span>Erro ao calcular: {{ resultado }}</span>
+						<span>Erro ao calcular: {{ result }}</span>
 					</div>
 					<div v-else role="alert" class="alert alert-info">
-						<span>Resultado: {{ resultado | currency('R$', 2, { decimalSeparator: ',' }) }}</span>
+						<span>Resultado: {{ result | currency('R$', 2, { decimalSeparator: ',' }) }}</span>
 					</div>
 				</div>
 			</div>

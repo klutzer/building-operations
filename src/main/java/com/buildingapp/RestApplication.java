@@ -10,7 +10,6 @@ import javax.ws.rs.ApplicationPath;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.logging.LoggingFeature;
-import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.mentabean.BeanManager;
 import org.mentabean.BeanSession;
@@ -38,7 +37,6 @@ public class RestApplication extends ResourceConfig {
 		instance = this;
 		LOGGER.info("Starting RestApplication...");
 		register(JacksonFeature.class);
-		register(MultiPartFeature.class);
 		packages(true, getClass().getPackage().getName());
 		registerClasses(ApiListingResource.class, SwaggerSerializers.class);
 		register(new LoggingFeature(Logger.getLogger(getClass().getName()), Level.INFO,

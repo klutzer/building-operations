@@ -7,11 +7,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @Provider
 public class JsonProvider implements ContextResolver<ObjectMapper> {
-	
+
 	private final ObjectMapper mapper = new CustomMapper();
 
 	@Override
@@ -29,10 +28,6 @@ public class JsonProvider implements ContextResolver<ObjectMapper> {
 			configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			setSerializationInclusion(Include.NON_NULL);
 			configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-			JavaTimeModule dateModule = new JavaTimeModule();
-			//dateModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_PATTERN)));
-			//dateModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_PATTERN)));
-			registerModule(dateModule);
 		}
 	}
 

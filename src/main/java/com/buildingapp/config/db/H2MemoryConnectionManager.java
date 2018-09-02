@@ -5,7 +5,7 @@ import static java.math.BigDecimal.valueOf;
 import org.mentabean.BeanSession;
 import org.mentabean.jdbc.H2BeanSession;
 
-import com.buildingapp.data.Veiculo;
+import com.buildingapp.data.Vehicle;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -29,9 +29,9 @@ public class H2MemoryConnectionManager extends ConnectionManager {
 	@Override
 	public void preRun(BeanSession session) {
 		session.createTables();
-		session.save(new Veiculo("Caminhão baú", valueOf(1)));
-		session.save(new Veiculo("Caminhão caçamba", valueOf(1.05)));
-		session.save(new Veiculo("Carreta", valueOf(1.12)));
+		session.save(new Vehicle("Caminhão baú", valueOf(1)));
+		session.save(new Vehicle("Caminhão caçamba", valueOf(1.05)));
+		session.save(new Vehicle("Carreta", valueOf(1.12)));
 	}
 
 }

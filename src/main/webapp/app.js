@@ -3,28 +3,28 @@
 new Vue({
 	el: '#app',
 	data: {
-		dadosCalculo: {},
-		veiculos: [],
-		resultado: null,
+		calcData: {},
+		vehicles: [],
+		result: null,
 		error: false
 	},
 	methods: {
-		getVeiculos() {
+		getVehicles() {
 			this.$http.get('veiculo').then(response => {
-				this.veiculos = response.body
+				this.vehicles = response.body
 			})
 		},
-		calcular() {
-			this.$http.post('custoTransporte', this.dadosCalculo).then(response => {
-				this.resultado = response.body.resultado
+		calculate() {
+			this.$http.post('custoTransporte', this.calcData).then(response => {
+				this.result = response.body.result
 				this.error = false;
 			}, response => {
-				this.resultado = response.body.message
+				this.result = response.body.message
 				this.error = true;
 			})
 		}
 	},
 	beforeMount() {
-		this.getVeiculos()
+		this.getVehicles()
 	}
 })

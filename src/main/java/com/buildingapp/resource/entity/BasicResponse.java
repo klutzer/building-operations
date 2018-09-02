@@ -1,4 +1,4 @@
-package com.buildingapp.resources;
+package com.buildingapp.resource.entity;
 
 /**
  * @author erico.lutzer
@@ -7,9 +7,6 @@ package com.buildingapp.resources;
 public class BasicResponse {
 
 	private String message;
-
-	public BasicResponse() {
-	}
 
 	public static BasicResponse withMessage(String message) {
 		BasicResponse response = new BasicResponse();

@@ -5,7 +5,7 @@ import org.mentabean.BeanManager;
 import org.mentabean.DBTypes;
 import org.mentabean.util.PropertiesProxy;
 
-import com.buildingapp.data.Veiculo;
+import com.buildingapp.data.Vehicle;
 
 public final class DatabaseMappings {
 
@@ -17,11 +17,11 @@ public final class DatabaseMappings {
 	}
 
 	private void configureVeiculo() {
-		Veiculo proxy = PropertiesProxy.create(Veiculo.class);
-		manager.addBeanConfig(new BeanConfig(Veiculo.class, "veiculos")
+		Vehicle proxy = PropertiesProxy.create(Vehicle.class);
+		manager.addBeanConfig(new BeanConfig(Vehicle.class, "veiculos")
 				.pk(proxy.getId(), DBTypes.AUTOINCREMENT)
-				.field(proxy.getDescricao(), DBTypes.STRING)
-				.field(proxy.getFatorMultiplicador(), DBTypes.BIGDECIMAL)
+				.field(proxy.getName(), DBTypes.STRING)
+				.field(proxy.getMultiplier(), DBTypes.BIGDECIMAL)
 				);
 	}
 

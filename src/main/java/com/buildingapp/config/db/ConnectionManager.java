@@ -21,10 +21,6 @@ public abstract class ConnectionManager implements Factory<Connection>, Intercep
 		pool = createPool();
 	}
 
-	/**
-	 * Here you can configure your database settings...<br>
-	 * Take a look at HikariCP (https://github.com/brettwooldridge/HikariCP)
-	 */
 	public abstract HikariDataSource createPool();
 
 	public abstract Class<? extends BeanSession> getSessionClass();
