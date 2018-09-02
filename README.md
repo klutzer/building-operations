@@ -15,3 +15,7 @@ mvn jetty:run
 ```
 
 Após isso, o acesso à interface web e à documentação interativa dos serviços (swagger), estarão disponíveis, respectivamente, nos endereços `http://localhost:8080` e `http://localhost:8080/docs`.
+
+## Exercício 2
+
+Está contido em formato zip, em `docs/Exercicio2Resolvido.zip`, contendo a classe original, que foi modificada apenas nos comentários, explicando os problemas encontrados, e mais a classe que contém a refatoração e simplificação do código.
