@@ -1,4 +1,4 @@
-package com.example.resources;
+package com.buildingapp.resource;
 
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.servlet.ServletContainer;

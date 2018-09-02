@@ -20,14 +20,14 @@ public class TransportCostTest {
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Before
-	public void definirDadosPadrao() {
+	public void setUpDefaultData() {
 		vehicles.put("Caminhão baú", new Vehicle("Caminhão baú", valueOf(1)));
 		vehicles.put("Caminhão caçamba", new Vehicle("Caminhão caçamba", valueOf(1.05)));
 		vehicles.put("Carreta", new Vehicle("Carreta", valueOf(1.12)));
 	}
 
 	@Test
-	public void testCenario1() {
+	public void testScenario1() {
 		TransportCost cost = new TransportCost()
 				.withDistancePaved(100)
 				.withDistanceNotPaved(0)
@@ -37,7 +37,7 @@ public class TransportCostTest {
 	}
 
 	@Test
-	public void testCenario2() {
+	public void testScenario2() {
 		TransportCost cost = new TransportCost()
 				.withDistancePaved(0)
 				.withDistanceNotPaved(60)
@@ -47,7 +47,7 @@ public class TransportCostTest {
 	}
 
 	@Test
-	public void testCenario3() {
+	public void testScenario3() {
 		TransportCost cost = new TransportCost()
 				.withDistancePaved(0)
 				.withDistanceNotPaved(180)
@@ -57,7 +57,7 @@ public class TransportCostTest {
 	}
 
 	@Test
-	public void testCenario4() {
+	public void testScenario4() {
 		TransportCost cost = new TransportCost()
 				.withDistancePaved(80)
 				.withDistanceNotPaved(20)
@@ -67,7 +67,7 @@ public class TransportCostTest {
 	}
 
 	@Test
-	public void testCenario5() {
+	public void testScenario5() {
 		TransportCost cost = new TransportCost()
 				.withDistancePaved(50)
 				.withDistanceNotPaved(30)

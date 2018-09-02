@@ -1,4 +1,4 @@
-package com.example.resources;
+package com.buildingapp.resource;
 
 import java.math.BigDecimal;
 
