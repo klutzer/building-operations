@@ -44,7 +44,7 @@
 						<span>Erro ao calcular: {{ result }}</span>
 					</div>
 					<div v-else role="alert" class="alert alert-info">
-						<span>Resultado: {{ result | currency('R$', 2, { decimalSeparator: ',' }) }}</span>
+						<span>Resultado: {{ result | currency }}</span>
 					</div>
 				</div>
 			</div>
@@ -53,7 +53,6 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue2-filters/dist/vue2-filters.min.js"></script>
 	<script src="app.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	 crossorigin="anonymous"></script>

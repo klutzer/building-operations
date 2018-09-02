@@ -1,5 +1,17 @@
 ﻿Vue.http.options.root = '/api';
 
+Vue.filter('currency', function (value) {
+    if (typeof value !== "number") {
+        return value;
+    }
+    return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2
+    }).format(value);
+})
+
 new Vue({
 	el: '#app',
 	data: {
